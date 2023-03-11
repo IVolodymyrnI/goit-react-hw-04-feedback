@@ -40,7 +40,7 @@ export class FeedbackForm extends Component {
             </li>
           ))}
         </EmojisList>
-        <Button type="submit" disabled={!savedType}>
+        <Button type="submit" isSaved={savedType}>
           Send
         </Button>
       </Form>
