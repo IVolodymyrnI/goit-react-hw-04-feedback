@@ -17,8 +17,8 @@ export function Statistics({ positivePercentage, total, bad, good, neutral }) {
   );
 }
 
-Statistics.proptype = {
-  positivePercentage: PropTypes.number.isRequired,
+Statistics.propTypes = {
+  positivePercentage: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,

@@ -10,7 +10,9 @@ export const FeedbackSection = ({ title, children }) => {
   );
 };
 
-FeedbackSection.proptype = {
+FeedbackSection.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.element, PropTypes.bool])
+  ),
 };

@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { FeedbackForm } from 'components/Feedback/FeedbackForm/FeedbackForm';
 import { FeedbackSection } from 'components/Feedback/FeedbackSection/FeedbackSection';
 import { Statistics } from 'components/Feedback/Statistics/Statistics';
+import { Notification } from 'components/Feedback/Notification/Notification ';
 import emojis from 'data/emojis';
 
 export class App extends Component {
@@ -22,11 +23,12 @@ export class App extends Component {
 
   countPositiveFeedbackPercentage({ total, good }) {
     const positivePercentage = Math.round((good / total) * 100);
-    return total ? `${positivePercentage}%` : `${total}%`;
+    return `${positivePercentage}%`;
   }
 
   render() {
     const { good, bad, neutral } = this.state;
+    const isFeedback = Boolean(good || bad || neutral);
     const total = this.countTotalFeedback(this.state);
     const positivePercentage = this.countPositiveFeedbackPercentage({
       good,
@@ -39,13 +41,17 @@ export class App extends Component {
           onSubmit={value => this.onSubmitOption(value)}
           data={emojis}
         />
-        <Statistics
-          good={good}
-          bad={bad}
-          neutral={neutral}
-          total={total}
-          positivePercentage={positivePercentage}
-        />
+        {isFeedback ? (
+          <Statistics
+            good={good}
+            bad={bad}
+            neutral={neutral}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
       </FeedbackSection>
     );
   }

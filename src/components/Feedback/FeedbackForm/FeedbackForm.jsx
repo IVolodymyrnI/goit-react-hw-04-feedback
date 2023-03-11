@@ -48,11 +48,13 @@ export class FeedbackForm extends Component {
   }
 }
 
-FeedbackForm.proptype = {
+FeedbackForm.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      onSubmit: PropTypes.func.isRequired,
+      type: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
     })
   ),
+  onSubmit: PropTypes.func.isRequired,
 };
