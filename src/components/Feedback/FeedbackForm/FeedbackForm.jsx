@@ -1,52 +1,46 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { EmojisList, EmojiImg, Button, Form } from './FeedBackFormStyle';
 
-export class FeedbackForm extends Component {
-  state = {
-    savedType: '',
-  };
+export const FeedbackForm = ({ data, onSubmit }) => {
+  const [savedType, setSavedType] = useState('');
 
-  onClick = ({ currentTarget }) => {
+  const onClick = ({ currentTarget }) => {
     const { name } = currentTarget;
-    this.setState({ savedType: name });
+    setSavedType(name);
   };
 
-  onSubmit = e => {
+  const onSubmiting = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.savedType);
-    this.reset();
+    onSubmit(savedType);
+    reset();
   };
 
-  reset = () => {
-    this.setState({ savedType: '' });
+  const reset = () => {
+    setSavedType('');
   };
 
-  render() {
-    const data = this.props.data;
-    const { savedType } = this.state;
-    return (
-      <Form onSubmit={this.onSubmit}>
-        <EmojisList>
-          {data.map(({ id, type, img }) => (
-            <li key={id}>
-              <EmojiImg
-                src={img}
-                alt={type}
-                name={type}
-                value={savedType}
-                onClick={this.onClick}
-              />
-            </li>
-          ))}
-        </EmojisList>
-        <Button type="submit" isSaved={savedType}>
-          Send
-        </Button>
-      </Form>
-    );
-  }
-}
+  return (
+    <Form onSubmit={onSubmiting}>
+      <EmojisList>
+        {data.map(({ id, type, img }) => (
+          <li key={id}>
+            <EmojiImg
+              src={img}
+              alt={type}
+              name={type}
+              value={savedType}
+              onClick={onClick}
+            />
+          </li>
+        ))}
+      </EmojisList>
+      <Button type="submit" isSaved={savedType}>
+        Send
+      </Button>
+    </Form>
+  );
+};
 
 FeedbackForm.propTypes = {
   data: PropTypes.arrayOf(
