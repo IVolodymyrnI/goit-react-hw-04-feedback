@@ -13,13 +13,9 @@ export const FeedbackForm = ({ data, onSubmit }) => {
   const onSubmiting = e => {
     e.preventDefault();
     onSubmit(savedType);
-    reset();
-  };
-
-  const reset = () => {
     setSavedType('');
-  };
-
+	};
+	
   return (
     <Form onSubmit={onSubmiting}>
       <EmojisList>
